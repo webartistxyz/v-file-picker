@@ -12,10 +12,14 @@ npm i v-file-picker
 
 #### How to use !!!
 
+## Method 1
+
+### Import within a specific component to use only in a component
+
 After installing import the component in your desired file.
 
 ```js
-import VFilePicker from "v-file-picker";
+import { VFilePicker } from "v-file-picker";
 
 export default {
   name: "YourComponentName",
@@ -25,6 +29,33 @@ export default {
     };
   },
 };
+```
+
+```html
+<!-- Component.vue template -->
+<template>
+  <v-file-picker
+    @fileUploaded="(file) => document = file"
+    name="document"
+    id="docFile"
+    class="col-md-6"
+  >
+    Document
+    <!-- Input label -->
+  </v-file-picker>
+</template>
+```
+
+## Method 2
+
+### Import in main.js file to use globally
+
+After installing import the component in your main.js file.
+
+```js
+import VFilePicker from "v-file-picker";
+
+createApp(App).use(VFilePicker).mount("#app");
 ```
 
 ```html
@@ -140,6 +171,12 @@ export default {
       fileURL: "with_file_name_and_url.png",
     };
   },
+  methods: {
+    removeDoc() {
+      this.fileName = "";
+      this.fileURL = "";
+    },
+  },
 };
 ```
 
@@ -147,6 +184,7 @@ export default {
 <template>
   <v-file-picker
     @fileUploaded="(file) => document = file"
+    @removeDoc="removeDoc"
     :validExtension="extensions"
     :size="2097152"
     name="document"
@@ -178,3 +216,10 @@ export default {
 | **id**                | `string`  | `''`                                                                       | Use it to set input id                                                                                             |
 | **fileUrl**           | `string`  | `''`                                                                       | Use a file URL to show the file that the user previously uploaded. We normally use this when we are updating data. |
 | **fileName**          | `string`  | `''`                                                                       | Show the file name that the user previously uploaded. We normally use this when we are updating data.              |
+
+### Events
+
+| Name             | Description                                                                                                                                                                  |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **fileUploaded** | This event will emit when the user uploads a file.                                                                                                                           |
+| **removeDoc**    | This event will emit when the user presses the remove button to remove the previous file and upload a new one. Normally we need this event when a user tries to update data. |

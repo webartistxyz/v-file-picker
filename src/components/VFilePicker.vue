@@ -1,6 +1,6 @@
 <template>
-    <div class="form-group">
-        <label :for="id" class="d-flex flex-row justify-content-between align-content-center">
+    <div>
+        <label :for="id" class="flex-design">
             <slot/>
             <span v-if="optional" class="text-secondary">(Optional)</span>
         </label>
@@ -19,7 +19,7 @@
             <a class="form-control" style="display: inline-block; width: 110px; white-space: nowrap; overflow: hidden !important; text-overflow: ellipsis;" 
             :href="fileUrl" target="_blank">{{ fileName }}</a>
             <label @click="$emit('removeDoc')"
-                   class="btn btn-danger">remove</label>
+                   class="btn btn-danger">Remove</label>
         </div>
 
         <div class="invalid-feedback" v-if="errorMsz || internalError">
@@ -80,12 +80,16 @@ export default {
     },
     data() {
         return {
-            internalError: ''
+            internalError: '',
+          timeout: ''
         }
     },
     watch: {
         internalError(){
-            setTimeout(() => {
+          if (this.timeout) {
+              clearTimeout(this.timeout);
+          }
+            this.timeout = setTimeout(() => {
                 this.internalError = ''
             }, 3000)
         }
