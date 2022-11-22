@@ -1,6 +1,6 @@
 {
   "name": "v-file-picker",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "type": "module",
   "description": "A simple Vue 3 file picker including basic file validation. Such as file size and file type validation.",
   "author": "Mohiuddin Sadek <mhddnsadek@gmail.com>",
@@ -17,7 +17,7 @@
     "v-file-picker",
     "input-type-file",
     "simple file picker for vuejs 3",
-    "vue 3 package for for file input"
+    "vue 3 npm package for file input"
   ],
   "license": "MIT",
   "files": [
